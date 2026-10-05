@@ -1,0 +1,32 @@
+export const demoAccounts = [
+  {
+    id: "faculty",
+    password: "teach123",
+    role: "faculty",
+    name: "Faculty",
+    label: "Faculty",
+    studentId: null,
+    icon: "👩‍🏫",
+    description: "Cohort dashboard, student records and check-ins",
+  },
+  {
+    id: "advisor",
+    password: "guide123",
+    role: "advisor",
+    name: "Academic Advisor",
+    label: "Academic advisor",
+    studentId: null,
+    icon: "🧭",
+    description: "Academic support casework and follow-ups",
+  },
+  {
+    id: "kabir",
+    password: "kabir123",
+    role: "student",
+    name: "Kabir",
+    label: "Student · Kabir",
+    studentId: 1,
+    icon: "🎒",
+    description: "Kabir's personal profile and support messages",
+  },
+];
