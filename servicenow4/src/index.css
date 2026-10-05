@@ -1,1 +1,187 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    color: #172033;
+    background: #f7f8fc;
+    font-optical-sizing: auto;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    color: #312e81;
+    background: #e0e7ff;
+  }
+}
+
+.app-shell {
+  background:
+    radial-gradient(ellipse at 90% 0%, rgb(224 231 255 / 36%), transparent 33rem),
+    #f7f8fc;
+}
+
+.brand-mark {
+  background: linear-gradient(145deg, #6366f1, #4338ca);
+}
+
+.panel-card {
+  border: 1px solid rgb(226 232 240 / 90%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 95%);
+  box-shadow: 0 2px 8px rgb(15 23 42 / 3%);
+}
+
+.section-kicker {
+  color: #6366f1;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.focus-banner {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(115deg, #3730a3, #4f46e5 55%, #6366f1);
+}
+
+.focus-orb {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgb(255 255 255 / 13%);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.focus-orb-one {
+  top: -8rem;
+  right: 9%;
+  width: 21rem;
+  height: 21rem;
+  background: radial-gradient(circle, rgb(255 255 255 / 10%), transparent 68%);
+}
+
+.focus-orb-two {
+  right: 2rem;
+  bottom: -15rem;
+  width: 24rem;
+  height: 24rem;
+}
+
+.detail-hero {
+  background:
+    radial-gradient(ellipse at 90% 15%, rgb(199 210 254 / 52%), transparent 24rem),
+    linear-gradient(125deg, #f8faff, #f5f3ff 62%, #fff);
+}
+
+.detail-orb {
+  position: absolute;
+  right: 26%;
+  bottom: -8rem;
+  width: 14rem;
+  height: 14rem;
+  border: 1px solid rgb(99 102 241 / 9%);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.login-backdrop {
+  background:
+    radial-gradient(ellipse at 90% 15%, rgb(224 231 255 / 65%), transparent 26rem),
+    radial-gradient(ellipse at 0% 95%, rgb(240 253 250 / 70%), transparent 22rem);
+}
+
+.login-aside {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(145deg, #3730a3, #4f46e5 60%, #6366f1);
+}
+
+.login-orb {
+  position: absolute;
+  z-index: -1;
+  right: -6rem;
+  bottom: -9rem;
+  width: 24rem;
+  height: 24rem;
+  border: 1px solid rgb(255 255 255 / 17%);
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgb(255 255 255 / 12%), transparent 70%);
+}
+
+.student-welcome {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 20%, rgb(165 180 252 / 25%), transparent 22rem),
+    linear-gradient(115deg, #3730a3, #4f46e5 60%, #6366f1);
+}
+
+.modal-backdrop {
+  background: rgb(15 23 42 / 48%);
+  backdrop-filter: blur(5px);
+  animation: backdrop-appear 150ms ease-out;
+}
+
+.modal-panel {
+  animation: panel-appear 180ms ease-out;
+}
+
+@keyframes backdrop-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

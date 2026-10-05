@@ -1,5 +1,3 @@
-import React from "react";
-
 function RiskBadge({ score }) {
   let label;
   let styles;
@@ -17,8 +15,19 @@ function RiskBadge({ score }) {
 
   return (
     <span
+      aria-label={`${label} risk`}
       className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${styles}`}
     >
+      <span
+        aria-hidden="true"
+        className={`mr-1.5 h-1.5 w-1.5 rounded-full ${
+          label === "High"
+            ? "bg-red-500"
+            : label === "Medium"
+              ? "bg-yellow-500"
+              : "bg-green-500"
+        }`}
+      />
       {label}
     </span>
   );
