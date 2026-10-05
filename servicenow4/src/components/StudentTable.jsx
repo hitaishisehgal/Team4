@@ -1,17 +1,10 @@
 import React from "react";
-import RiskBadge from "./riskbadge";
+import RiskBadge from "./RiskBadge";
 
 function StudentTable({ students }) {
   const handleStudentClick = (student) => {
-    /*
-      If React Router is already configured, replace this with:
-
-      navigate(`/students/${student.id}`);
-
-      Do not create a new student structure.
-    */
-
-    console.log("Open student:", student.id);
+    // Person 5 can connect this to StudentDetails.jsx later.
+    console.log("Selected student:", student.id);
   };
 
   return (
@@ -20,54 +13,55 @@ function StudentTable({ students }) {
         <table className="min-w-full divide-y divide-slate-200">
           <thead className="bg-slate-50">
             <tr>
-              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Student
               </th>
 
-              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Attendance
               </th>
 
-              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Missed Assignments
               </th>
 
-              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Grade Change
               </th>
 
-              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Risk Score
               </th>
 
-              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Risk Level
               </th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-slate-100 bg-white">
+          <tbody className="divide-y divide-slate-100">
             {students.map((student) => {
-              const score = student.risk.score;
-
-              const gradeChange =
-                student.currentGrade - student.previousGrade;
-
-              const isHighRisk = score >= 70;
+              const isHighRisk = student.riskScore >= 70;
 
               return (
                 <tr
                   key={student.id}
                   onClick={() => handleStudentClick(student)}
                   className={`cursor-pointer transition-colors hover:bg-slate-50 ${
-                    isHighRisk ? "bg-red-50/40" : ""
+                    isHighRisk ? "bg-red-50/50" : "bg-white"
                   }`}
                 >
                   {/* Student */}
                   <td className="whitespace-nowrap px-6 py-4">
                     <div className="flex items-center">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-sm font-semibold text-slate-700">
-                        {student.name.charAt(0).toUpperCase()}
+                      <div
+                        className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${
+                          isHighRisk
+                            ? "bg-red-100 text-red-700"
+                            : "bg-slate-100 text-slate-700"
+                        }`}
+                      >
+                        {student.name.charAt(0)}
                       </div>
 
                       <div className="ml-3">
@@ -75,7 +69,7 @@ function StudentTable({ students }) {
                           {student.name}
                         </p>
 
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-slate-400">
                           Student #{student.id}
                         </p>
                       </div>
@@ -95,7 +89,7 @@ function StudentTable({ students }) {
                     </span>
                   </td>
 
-                  {/* Missed assignments */}
+                  {/* Assignments */}
                   <td className="whitespace-nowrap px-6 py-4">
                     <span
                       className={`text-sm font-medium ${
@@ -108,40 +102,40 @@ function StudentTable({ students }) {
                     </span>
                   </td>
 
-                  {/* Grade change */}
+                  {/* Grade Change */}
                   <td className="whitespace-nowrap px-6 py-4">
                     <span
                       className={`text-sm font-semibold ${
-                        gradeChange < 0
+                        student.gradeChange < 0
                           ? "text-red-600"
-                          : gradeChange > 0
+                          : student.gradeChange > 0
                           ? "text-green-600"
-                          : "text-slate-600"
+                          : "text-slate-500"
                       }`}
                     >
-                      {gradeChange > 0 ? "+" : ""}
-                      {gradeChange}
+                      {student.gradeChange > 0 ? "+" : ""}
+                      {student.gradeChange}
                     </span>
                   </td>
 
-                  {/* Risk score */}
+                  {/* Risk Score */}
                   <td className="whitespace-nowrap px-6 py-4">
                     <span
                       className={`text-sm font-bold ${
-                        isHighRisk
+                        student.riskScore >= 70
                           ? "text-red-600"
-                          : score >= 40
+                          : student.riskScore >= 40
                           ? "text-yellow-600"
                           : "text-green-600"
                       }`}
                     >
-                      {score}
+                      {student.riskScore}
                     </span>
                   </td>
 
-                  {/* Risk badge */}
+                  {/* Risk Badge */}
                   <td className="whitespace-nowrap px-6 py-4">
-                    <RiskBadge score={score} />
+                    <RiskBadge score={student.riskScore} />
                   </td>
                 </tr>
               );
@@ -153,7 +147,7 @@ function StudentTable({ students }) {
       {students.length === 0 && (
         <div className="px-6 py-12 text-center">
           <p className="text-sm text-slate-500">
-            No students available.
+            No student data available.
           </p>
         </div>
       )}
